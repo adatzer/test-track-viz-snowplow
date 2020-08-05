@@ -1,0 +1,28 @@
+{
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+
+    "description": "Schema for browser's WebGL support",
+
+    "self": {
+	"vendor": "test.adatzer.iglu",
+	"name": "br_webgl",
+	"format": "jsonschema",
+	"version": "1-0-0"
+    },
+
+    "type": "object",
+
+    "properties": {
+	"isWebGLAvailable": {
+            "description": "If the browser supports WebGL",
+	    "type": "boolean"
+	},
+        "isWebGL2Available": {
+            "description": "If the browser supports WebGL2",
+            "type": "boolean"
+        }
+    },
+
+    "required": [ "isWebGLAvailable", "isWebGL2Available" ],
+    "additionalProperties": false
+}

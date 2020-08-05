@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <title>kon</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+
+    <link type="text/css"
+          rel="stylesheet"
+          href="styles/main.css">
+
+  </head>
+
+  <body>
+
+    <!-- Snowplow starts plowing -->
+    <script type="text/javascript">
+
+      ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+                                          p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+                                                                                           };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+                                          n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","js/sp.js","snowp_in_fun"));
+
+      window.snowp_in_fun( 'newTracker', 'cfd', 'localhost:9090', {
+
+          // encodeBase64: false,
+          appId: 'm3tak3',
+          platform: "web",
+          discoverRootDomain: true,
+          eventMethod: "beacon", // "post", "get", "beacon"
+          contexts: {
+              webPage: true
+              // geolocation: true
+          }
+
+      } );
+
+      window.snowp_in_fun( 'setUserId', 'adatzer' );
+      window.snowp_in_fun( 'setReferrerUrl', 'testTool' );
+
+    </script>
+    <!-- Snowplow stops plowing -->
+
+
+    <!-- -------------------------------------------------------------- -->
+
+    <!-- CONTAINER - renderer.domElement will be appended here -->
+    <div id="scene-container"></div>
+
+    <!-- LOADING - until DOMContentLoaded -->
+    <div id="loadin">. . . L O A D I N G . . .</div>
+
+    <!-- INFO - appendix will be appended here -->
+    <div id="info"></div>
+
+    <!-- RANGES -->
+    <div id="ranges-area"><!-- ** -->
+      <div id="sync-range">
+        <input id="sync-from" type="range" min="0" max="100" value="0">
+        <input id="sync-to"   type="range" min="0" max="100" value="100">
+      </div>
+
+      <div id="async-range">
+        <div id="red-range">
+          <input id="red-from"  type="range" min="0" max="100" value="0">
+          <input id="red-to"    type="range" min="0" max="100" value="100">
+        </div>
+        <div id="blue-range">
+          <input id="blue-from" type="range" min="0" max="100" value="0">
+          <input id="blue-to"   type="range" min="0" max="100" value="100">
+        </div>
+      </div>
+    </div>
+
+    <!-- BUTTONS -->
+    <div id="screen-menu">
+      <button type="button" id="reset-button" data-test="reset">RESET/R</button>
+      <br>
+      <button type="button" id="pause-button" data-test="pause">PAUSE/Space</button>
+      <br>
+      <br>
+      <button type="button" id="kartesian" data-test="kartesian">CARTESIAN</button>
+      <br>
+      <button type="button" id="cylindrical" data-test="cylindrical">CYLINDRICAL</button>
+      <br>
+      <button type="button" id="spherical" data-test="spherical">SPHERICAL</button>
+      <br>
+      <br>
+      <button type="button" id="syncronize" data-test="sync">SYNC Draw</button>
+      <br>
+      <button type="button" id="desyncronize" data-test="async">ASYNC Draw</button>
+      <br>
+      <br>
+      <button type="button" id="fullScreen" data-test="fullscreen">FULLscreen</button>
+      <br>
+      <button type="button" id="grid" data-test="gridscreen">GRIDscreen</button>
+      <br>
+    </div>
+
+    <!-- WEBGL SHADERS -->
+    <!-- 1. Vertex Shader -->
+    <script id="vShader" type="x-shader/x-vertex">
+
+      precision mediump float;
+      precision mediump int;
+
+      uniform mat4 modelViewMatrix;
+      uniform mat4 projectionMatrix;
+
+      attribute vec3 position;
+
+
+#ifdef PICKING
+      attribute vec3 pic;
+#else
+      attribute vec3 color;
+#endif
+
+      uniform float uK;
+      uniform float uC;
+      uniform float uS;
+      uniform float uSize;
+
+      varying vec3 vColor;
+
+      const float PI = 3.14159265358979323846264;
+      const float TAU = 2.0 * 3.14159265358979323846264;
+
+      void main() {
+
+#ifdef PICKING
+          vColor = pic;
+#else
+          vColor = color;
+#endif
+
+          float k = uK;
+          float c = uC;
+          float s = uS;
+          float siz = uSize;
+
+          vec3 pos = vec3(position);
+
+          vec3 kpos = pos * vec3(2.0, 2.0, 2.0) - vec3(1.0, 1.0, 1.0);
+
+          float cx = pos.y * cos(TAU * pos.x);
+          float cy = pos.y * sin(TAU * pos.x);
+          float cz = 2.0 * pos.z - 1.0;
+          vec3 cpos = vec3(cx, cy, cz);
+
+          float sx = pos.z * cos(TAU * pos.x) * sin(PI * pos.y);
+          float sy = pos.z * sin(TAU * pos.x) * sin(PI * pos.y);
+          float sz = pos.z * cos(PI * pos.y);
+          vec3 spos = vec3(sx, sy, sz);
+
+          vec3 finpos = k * kpos + c * cpos + s * spos;
+
+          gl_PointSize = siz * 1.0;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(finpos, 1.0);
+
+      }
+
+    </script>
+
+    <!-- 2. Fragment Shader -->
+    <script id="fShader" type="x-shader/x-fragment">
+
+      precision mediump float;
+      precision mediump int;
+
+      varying vec3 vColor;
+
+      void main() {
+
+          vec3 color = vec3(vColor);
+
+          gl_FragColor = vec4(color, 0.85);
+      }
+
+    </script>
+
+    <!-- JSR -->
+    <script src="js/jsr.js"></script>
+
+    <!-- MAIN -->
+    <script id="main" type="module">
+
+      import { myfun } from './js/appdemo.js'
+
+      myfun( 1.0, 0.1, 2, 100000 );
+
+    </script>
+
+  </body>
+
+</html>

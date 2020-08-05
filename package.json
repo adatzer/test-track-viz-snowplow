@@ -1,0 +1,28 @@
+{
+        "name": "snowplow-micro-example",
+        "version": "1.0.0",
+        "description": "An example using snowplow-micro and testing with Cypress",
+        "private": true,
+        "scripts": {
+                "test": "echo \"Error: no test specified\" && exit 1",
+                "start": "ws --directory www/ --port 8080",
+                "cypress:open": "cypress open --config-file false",
+                "cypress:run": "cypress run --config-file false"
+        },
+        "repository": {
+                "type": "git",
+                "url": "git+https://github.com/adatzer/snowplow-micro-example.git"
+        },
+        "author": "",
+        "license": "ISC",
+        "bugs": {
+                "url": "https://github.com/adatzer/snowplow-micro-example/issues"
+        },
+        "homepage": "https://github.com/adatzer/snowplow-micro-example#readme",
+        "devDependencies": {
+                "cypress": "^4.11.0"
+        },
+        "dependencies": {
+                "local-web-server": "^4.2.1"
+        }
+}

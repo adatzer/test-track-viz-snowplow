@@ -1,0 +1,98 @@
+
+[[file:https://github.com/adatzer/snowplow-micro-example/workflows/End-to-end%20tests%20with%20Snowplow%20Micro%20and%20Cypress/badge.svg?branch=development]]
+
+
+* Testing the tracking of a visualization app with Snowplow Micro
+
+
+** Quick start
+
+   Only prerequisites:
+
++ Docker
++ Browser supporting WebGL
++ Npm
+
+   Then assuming you are on Linux, that your homedir is ~/home/user~ and that ~$HOME/.local/bin~ is in your PATH:
+
+
+#+BEGIN_EXAMPLE
+
+  $ pwd
+  /home/user
+
+  $ git clone https://github.com/adatzer/snowplow-micro-example.git
+
+  $ cd snowplow-micro-example
+
+  # Start Snowplow Micro
+  $ docker run --mount type=bind,source=$(pwd)/example,destination=/config -p 9090:9090 snowplow/snowplow-micro:latest --collector-config /config/micro.conf --iglu /config/iglu.json
+
+  # Install dependencies and start the web server
+  $ npm install
+  $ npm start
+
+  # Run tests
+  $ npm run cypress:run
+
+#+END_EXAMPLE
+
+
+
+** Description
+
+This is a demo 3D visualization app that uses the Snowplow Javascript tracker to collect events. It then uses [[https://github.com/snowplow-incubator/snowplow-micro][Snowplow Micro]] along with [[https://www.cypress.io][Cypress]] to test the data collection setup in an automated GitHub Actions workflow.
+
+
+** Special note on some included files
+
+
+| File                        | Origin                                                                                     |
+|-----------------------------+--------------------------------------------------------------------------------------------|
+| www/js/sp.js                | This is the [[https://github.com/snowplow/snowplow-javascript-tracker/releases/download/2.14.0/sp.js][Snowplow Javascript Tracker v.2.14.0]] .                                         |
+| jsm/helpers.js              | Copy from [[https://github.com/snowplow-incubator/snowplow-micro-examples][snowplow-micro-examples]] repository.                                              |
+| cypress/plugins/index.js    | Slightly modified copy from [[https://github.com/snowplow-incubator/snowplow-micro-examples][snowplow-micro-examples]] repository.                            |
+| cypress/support/commands.js | Copy from [[https://github.com/snowplow-incubator/snowplow-micro-examples][snowplow-micro-examples]] repository.                                              |
+| cypress/support/index.js    | Copy from [[https://github.com/snowplow-incubator/snowplow-micro-examples][snowplow-micro-examples]] repository.                                              |
+|                             |                                                                                            |
+| www/js/jsr.js               | This file is a renamed copy of the [[https://github.com/soanvig/jsr/blob/master/dist/main.js][main.js]] of [[https://mm-jsr.github.io][the M&M JSR range-inputs library]] .           |
+| www/styles/jsr.css          | This is a slightly modified copy of the [[https://github.com/soanvig/jsr/blob/master/dist/assets/css/main.css][main.css]]  again from the above JavaScript library. |
+|                             |                                                                                            |
+
+
+As Snowplow Analytics' Documentation recommends, you can self-host the JavaScript tracker, with steps that can be found [[https://docs.snowplowanalytics.com/docs/collecting-data/collecting-from-your-own-applications/javascript-tracker/self-hosting-the-javascript-tracker/][here]] .
+
+
+** Testing the tracking with Snowplow Micro
+
+[[https://github.com/snowplow-incubator/snowplow-micro][Snowplow Micro]] is a very small version of a full Snowplow data collection pipeline that was built to enable companies running Snowplow to test their data collection setup. Snowplow Micro can be run as part of automated test suites to ensure that new releases of websites, mobile apps and server-side applications can be confidently deployed to production.
+
+For a detailed introduction to Snowplow Micro you can read this [[https://snowplowanalytics.com/blog/2019/07/17/introducing-snowplow-micro/][blogpost]] .
+
+For exploring other examples showing the capabilities of Snowplow Micro, checkout the official [[https://github.com/snowplow-incubator/snowplow-micro-examples][snowplow-micro-examples]] repository.
+
+Using the custom Cypress commands from the [[https://github.com/snowplow-incubator/snowplow-micro-examples][snowplow-micro-examples]] repository, we created a similar example of automated testing of our Snowplow tracking setup, while exploring some great Snowplow tracking capabilities on a 3D WebGL visualization app.
+
+
+*** Iglu
+
+    The directory ~adatzer-iglu~ serves as the [[https://github.com/snowplow/iglu][Iglu]] repository for our custom contexts and entities, served as a static website.
+
+*** What we track
+
+ - Default Snowplow events
+     - Pageviews
+     - Activity
+     - Link clicks
+     - Form events
+ - User interactions with the UI (as structured events)
+ - Rendering information
+     - Browser WebGL capabilities
+     - Frames per second
+     - Points on screen
+
+
+**** To Do
+
+     1. Track the input range events
+     2. Modify the camera controls (Trackball controls) to track zoom, rotate and pan events

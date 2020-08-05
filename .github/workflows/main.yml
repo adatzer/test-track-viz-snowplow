@@ -1,0 +1,45 @@
+name: End-to-end tests with Snowplow Micro and Cypress
+
+on:
+
+  push:
+
+    branches:
+      - development
+
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    name: Set up Micro and run tests
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: test-track-viz-snowplow
+
+      - name: Start micro
+        run: docker run --mount type=bind,source=$(pwd)/micro,destination=/config -p 9090:9090 snowplow/snowplow-micro:latest --collector-config /config/micro.conf --iglu /config/iglu.json &
+        working-directory: test-track-viz-snowplow
+
+      - name: Npm things
+        run: |
+          npm install
+          npm start &
+        working-directory: test-track-viz-snowplow
+
+      - name: Wait on ports 9090 and 8080
+        run: |
+          while ! nc -z localhost 9090; do sleep 0.1; done
+          while ! nc -z localhost 8080; do sleep 0.1; done
+
+      - name: Cypress run the tests
+        run: |
+          npm run cypress:run -- --spec "cypress/integration/app-specs/*"
+          npm run cypress:run -- --spec "cypress/integration/micro-specs/*"
+          npm run cypress:run -- --spec "cypress/integration/helpers_spec.js"
+        working-directory: test-track-viz-snowplow

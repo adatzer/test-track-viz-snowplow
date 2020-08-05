@@ -1,0 +1,24 @@
+{
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+
+    "description": "Schema for a pageview on a webgl page",
+
+    "self": {
+	"vendor": "test.adatzer.iglu",
+	"name": "pv_webgl",
+	"format": "jsonschema",
+	"version": "1-0-0"
+    },
+
+    "type": "object",
+
+    "properties": {
+	"needsWebGL": {
+            "description": "Whether the page needs WebGL to be rendered",
+	    "type": "boolean"
+	}
+    },
+
+    "required": [ "needsWebGL" ],
+    "additionalProperties": false
+}

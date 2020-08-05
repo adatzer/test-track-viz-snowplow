@@ -1,0 +1,89 @@
+{
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+
+    "description": "Schema for capturing state of the kon app",
+
+    "self": {
+	"vendor": "test.adatzer.iglu",
+	"name": "kon_state",
+	"format": "jsonschema",
+	"version": "1-0-0"
+    },
+
+    "type": "object",
+
+    "properties": {
+
+	"FPS": {
+            "description": "Frames Per Second",
+	    "type": "number",
+            "multipleOf": 1.0,
+            "minimum": 0
+	},
+
+        "points_on_screen": {
+            "description": "the number of points rendered on screen",
+            "type": "number",
+            "multipleOf": 1.0,
+            "minimum": 0
+        },
+
+        "coord_system": {
+            "description": "the current coordinate system",
+            "type": "string",
+            "enum": [ "Cartesian", "Cylindrical", "Spherical" ]
+        },
+
+        "screen_layout": {
+            "description": "the current screen layout",
+            "type": "string",
+            "enum": [ "Full", "Grid" ]
+        },
+
+        "draw_range_style": {
+            "description": "the current range style used",
+            "type": "string",
+            "enum": [ "Sync", "Async" ]
+        },
+
+        "sync_draw_range": {
+            "type": "object",
+            "properties": {
+
+                "from": {
+                    "type": "array",
+                    "items": { "type": "number" }
+                },
+                "to": {
+                    "type": "array",
+                    "items": { "type": "number" }
+                }
+
+            },
+            "required": [ "from", "to" ],
+            "additionalProperties": false
+        },
+
+        "async_draw_range": {
+            "type": "object",
+            "properties": {
+
+                "from": {
+                    "type": "array",
+                    "items": { "type": "number" }
+                },
+                "to": {
+                    "type": "array",
+                    "items": { "type": "number" }
+                }
+
+            },
+            "required": [ "from", "to" ],
+            "additionalProperties": false
+        }
+
+    },
+
+    "required": [ "FPS", "points_on_screen", "coord_system", "screen_layout", "draw_range_style", "sync_draw_range", "async_draw_range" ],
+    "additionalProperties": false
+}

@@ -1,0 +1,51 @@
+
+body {
+    overflow: auto
+    text-align: center;
+    background-color: #333333;
+}
+
+h1 {
+    text-align: center;
+    margin: 3vmin;
+    padding: 3vmin;
+    font-size: 3.5rem;
+    color: #dddddd;
+}
+
+h2 {
+    margin: 5vmin;
+    font-size: 2.0rem;
+    color: #ffffff;
+}
+
+p {
+    margin: 3vmin;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+ul {
+    margin: 3vmin;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+a:link{
+    color: #00cccc;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+label {
+    margin: 3vmin;
+    width: 90px;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+button {
+    cursor: pointer;
+}

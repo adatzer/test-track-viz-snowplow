@@ -1,0 +1,36 @@
+{
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+
+    "description": "Schema for supplied main function arguments",
+
+    "self": {
+	"vendor": "test.adatzer.iglu",
+	"name": "main_args",
+	"format": "jsonschema",
+	"version": "1-0-0"
+    },
+
+    "type": "object",
+
+    "properties": {
+	"point_size": {
+            "description": "The size of points",
+	    "type": "number"
+	},
+        "additive_blending": {
+            "description": "The factor used in additive blending",
+            "type": "number"
+        },
+        "num_clouds": {
+            "description": "The number of point clouds",
+            "type": "number"
+        },
+        "points_perCloud": {
+            "description": "Number of points per cloud",
+            "type": "number"
+        }
+    },
+
+    "required": [ "point_size", "additive_blending", "num_clouds", "points_perCloud" ],
+    "additionalProperties": false
+}

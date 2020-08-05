@@ -1,0 +1,249 @@
+
+body {
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+    color: #cccccc;
+    background-color: #000000;
+}
+
+h1 {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    font-size: 1.5rem;
+}
+
+a {
+    color: #330000;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+#scene-container {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+}
+
+#loadin {
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    cursor: default;
+    z-index: 200;
+    top: 123px;
+    width: 100%;
+    text-align: center;
+    color: #0099ff;
+    font-size: 2.0rem;
+}
+
+#info {
+    display: none;
+    position: absolute;
+    bottom: 1px;
+    left: 1px;
+    width: auto;
+    color: #09f;
+}
+
+#ranges-area {
+    display: none;
+    position: absolute;
+    bottom: 0px;
+    right: 2%;
+    width: 35vw;
+    min-width: 100px;
+    height: 9vh;
+    min-height: 60px;
+}
+
+#screen-menu {
+    display: none;
+    position: absolute;
+    top: 10vh;
+    right: 1px;
+    width: 10vw;
+    text-align: center;
+    color: #900;
+}
+
+button {
+    cursor: pointer;
+    top: 50%;
+    width: 9vw;
+    height: calc(9vw * 0.6);
+    max-height: 40px;
+    max-width: 80px;
+    background-color: #111;
+    color: #006699;
+    outline: 1px solid #006699;
+    border: 0px;
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+button:hover {
+    background-color: #006699;
+    color: #000000;
+    font-weight: bold;
+}
+
+/* table { */
+/*     border-collapse: collapse; */
+/* } */
+
+/* th, td { */
+/*     text-align: center; */
+/*     padding: 1px; */
+/* } */
+
+
+/* github/soanvig/jsr/dist/assets/css/main.css  Customized */
+
+.jsr, .jsr_bar, .jsr_label, .jsr_rail,
+.jsr_rail-outer, .jsr_slider {
+    box-sizing: border-box;
+}
+
+.jsr {
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    box-sizing: border-box;
+    width: 100%;
+
+    margin: 1px 0;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+
+    font: 1.2vh monospace;
+}
+
+.jsr_rail-outer {
+    position: relative;
+    padding: 1px 0;
+    cursor: pointer;
+}
+
+.jsr_rail {
+    height: 1vh;
+    max-height: 5px;
+    background: transparent;
+    outline: 1px solid #333333;
+    z-index: 1;
+}
+
+.jsr_bar {
+    position: absolute;
+    height: 5px;
+    background-color: #999;
+    z-index: 2;
+    cursor: move;
+}
+#sync-range .jsr_bar {
+    background-color: #990099;
+}
+#red-range .jsr_bar {
+    background-color: #990033;
+}
+#blue-range .jsr_bar {
+    background-color: #330099;
+}
+
+.jsr_bar--limit {
+    background-color: #333;
+    z-index: 1;
+    cursor: auto;
+}
+
+.jsr_slider {
+    position: absolute;
+    top: calc(5px / 2 + 1px);
+    left: 0;
+
+    transform: translate(-50%, -50%);
+
+    width: 15px;
+    height: 15px;
+
+    cursor: col-resize;
+    transition: background 0.1s ease-in-out;
+
+    outline: 0;
+
+    z-index: 3;
+}
+
+.jsr_slider::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #0099ff;
+    border-radius: 50%;
+}
+
+.jsr_slider:focus::before {
+    background: #0099ff;
+}
+
+.jsr_label {
+    position: absolute;
+    top: calc(1px + 5px + 15px / 1.5);
+    padding: 0.2em 0.4em;
+    background: transparent;
+    color: #0099ff;
+    font-size: 1.1em;
+    white-space: nowrap;
+    border-radius: 0.3em;
+    z-index: 2;
+}
+
+.jsr_label--minmax {
+    z-index: 1;
+    color: #999;
+    background: #333;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Merged labels */
+.jsr_label .jsr_label {
+    position: static;
+    display: inline-block;
+    font-size: 1em;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+.jsr_label .jsr_label::before {
+    content: ' - ';
+}
+
+.jsr_canvas {
+    margin-top: 5px;
+}
+
+/* Lock screen for touch */
+.jsr_lockscreen {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
