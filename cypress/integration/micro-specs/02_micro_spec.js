@@ -12,15 +12,15 @@ context( 'testing 02_micro_spec', () => {
 
 
 
-    it( 'asserts received a se event because of Pause button click', () => {
+    it( 'asserts received a struct event because of Pause button click', () => {
 
         const pause_params =
               {
-                  "e": "se",
-                  "se_ca": "Interaction",
-                  "se_ac": "PR",
-                  "se_la": "Pause",
-                  "se_pr": "byButton"
+                  "event": "struct",
+                  "se_category": "Interaction",
+                  "se_action": "PR",
+                  "se_label": "Pause",
+                  "se_property": "byButton"
               };
 
         cy.eventsWithParams( pause_params, 1 );
