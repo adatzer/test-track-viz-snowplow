@@ -237,17 +237,4 @@ describe( 'tests helper functions of helpers.js', () => {
 
     });
 
-    context( 'tests: base64decode', () => {
-
-        it( 'an example', () => {
-
-            expect( Micro.base64decode( "" ) ).to.eq( "" );
-
-            expect( Micro.base64decode( "eyJzY2hlbWEiOiJpZ2x1OmNvbS5zbm93cGxvd2FuYWx5dGljcy5zbm93cGxvdy91bnN0cnVjdF9ldmVudC9qc29uc2NoZW1hLzEtMC0wIiwiZGF0YSI6eyJzY2hlbWEiOiJpZ2x1OmNvbS5zbm93cGxvd2FuYWx5dGljcy5zbm93cGxvdy9zdWJtaXRfZm9ybS9qc29uc2NoZW1hLzEtMC0wIiwiZGF0YSI6eyJmb3JtSWQiOiJteWZvcm0iLCJmb3JtQ2xhc3NlcyI6W10sImVsZW1lbnRzIjpbeyJuYW1lIjoidXNlcl9lbWFpbCIsInZhbHVlIjoiYWRhQGlvLm1lIiwibm9kZU5hbWUiOiJJTlBVVCIsInR5cGUiOiJlbWFpbCJ9XX19fQ" ) )
-                .to.eq( "{\"schema\":\"iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0\",\"data\":{\"schema\":\"iglu:com.snowplowanalytics.snowplow/submit_form/jsonschema/1-0-0\",\"data\":{\"formId\":\"myform\",\"formClasses\":[],\"elements\":[{\"name\":\"user_email\",\"value\":\"ada@io.me\",\"nodeName\":\"INPUT\",\"type\":\"email\"}]}}}" );
-
-        });
-
-    });
-
 });

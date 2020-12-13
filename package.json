@@ -20,8 +20,8 @@
         },
         "homepage": "https://github.com/adatzer/snowplow-micro-example#readme",
         "devDependencies": {
-                "cypress": "^4.11.0",
-                "chromedriver": "*"
+                "chromedriver": "*",
+                "cypress": "^4.12.1"
         },
         "dependencies": {
                 "local-web-server": "^4.2.1"

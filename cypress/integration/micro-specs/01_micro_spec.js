@@ -22,9 +22,9 @@ context( 'testing 01_micro_spec', () => {
 
     it( 'asserts number events by eventType', () => {
 
-        cy.eventsWithEventType( "pv", 4 );
-        cy.eventsWithEventType( "se", 11 );
-        cy.eventsWithEventType( "ue", 4 );
+        cy.eventsWithEventType( "page_view", 4 );
+        cy.eventsWithEventType( "struct", 11 );
+        cy.eventsWithEventType( "unstruct", 4 );
 
     });
 
