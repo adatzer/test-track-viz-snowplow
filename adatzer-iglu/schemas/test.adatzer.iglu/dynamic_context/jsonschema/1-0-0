@@ -1,0 +1,18 @@
+{
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+    "description": "Dynamic context",
+    "self": {
+        "vendor": "test.adatzer",
+        "name": "dynamic_context",
+        "format": "jsonschema",
+        "version": "1-0-0"
+    },
+    "type": "object",
+    "properties": {
+        "dynamicValue": {
+            "type": "string"
+        }
+    },
+    "required": ["dynamicValue"],
+    "additionalProperties": false
+}

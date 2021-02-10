@@ -1,0 +1,18 @@
+{
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+    "description": "Static context",
+    "self": {
+        "vendor": "test.adatzer",
+        "name": "static_context",
+        "format": "jsonschema",
+        "version": "1-0-0"
+    },
+    "type": "object",
+    "properties": {
+        "staticValue": {
+            "type": "string"
+        }
+    },
+    "required": ["staticValue"],
+    "additionalProperties": false
+}
